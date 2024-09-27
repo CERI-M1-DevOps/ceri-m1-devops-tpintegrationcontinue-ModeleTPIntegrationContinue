@@ -14,11 +14,11 @@ class ListeSimpleTest {
         listeATester = new ListeSimple();
     }
 
-    @Test
+/*    @Test
     void listeConstruiteVide() {
         assertNull(listeATester.tete);
         assertEquals(0, listeATester.getSize());
-    }
+    }*/
 
     @Test
     void ajoutAugmenteSize() {

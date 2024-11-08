@@ -3,16 +3,27 @@ package liste;
 public class ListeSimple {
     private long size;
     Noeud tete;
-
+    /*
+     *Récupère la taille de la liste
+     * @return la taille de la liste.
+     */
     public long getSize() {
-        return size;
+        return size; 
     }
-
+/*
+ * Ajoute un élément au début de la liste.
+ * 
+ * @param element l'élément à ajouter.
+ */
     public void ajout(int element) {
         tete = new Noeud(element, tete);
         size++;
     }
-
+/*
+ * Modifie la première occurrence d'un élément spécifique dans la liste
+ * @param element l'élément à modifier
+ * @param nouvelleValeur la nouvelle valeur à attribuer à cet élément
+ */
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null && courant.getElement() != element)
@@ -20,7 +31,11 @@ public class ListeSimple {
         if (courant != null)
             courant.setElement(nouvelleValeur);
     }
-
+/*
+ *Modifie toutes les occurrences d'un élément spécifique dans la liste.
+ * @param element L'élément à rechercher dans la liste.
+ * @param nouvelleValeur La nouvelle valeur à attribuer aux occurrences trouvées.
+ */
     public void modifieTous(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null) {
@@ -28,8 +43,11 @@ public class ListeSimple {
                 courant.setElement(nouvelleValeur);
             courant = courant.getSuivant();
         }
-    }
-
+    } 
+/**
+ * Représente la liste sous forme de chaîne de caractères.
+ * @return Une représentation textuelle de la liste, avec les éléments séparés par des virgules.
+ */
     public String toString() {
         StringBuilder sb = new StringBuilder("ListeSimple(");
         Noeud n = tete;
@@ -120,7 +138,8 @@ public class ListeSimple {
     public void echanger(Noeud r1, Noeud r2) {
         if (r1 == r2)
             return;
-        Noeud precedentR1, precedentR2;
+        Noeud precedentR1;
+        Noeud precedentR2;
         if (r1 != tete && r2 != tete) {
             precedentR1 = getPrecedent(r1);
             precedentR2 = getPrecedent(r2);
@@ -131,7 +150,7 @@ public class ListeSimple {
             precedentR2.setSuivant(tete);
             tete = r2;
         }
-        else if (r2 == tete) {
+        else {
             precedentR1 = getPrecedent(r1);
             precedentR1.setSuivant(tete);
             tete = r1;

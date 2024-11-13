@@ -1,0 +1,40 @@
+name: Documentation - Génération et Livraison
+
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  contents: write
+
+jobs:
+  generate-docs:
+    name: Générer la documentation avec Maven
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+
+      - name: Generate Javadoc with Maven
+        run: mvn -B javadoc:javadoc
+
+      - name: Deploy Javadoc to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/reports/apidocs
+
+#  deploy-docs:
+#    name: Déployer la documentation sur GitHub Pages
+#    runs-on: ubuntu-latest
+#    needs: generate-docs
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
